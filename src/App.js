@@ -12,54 +12,32 @@ function App() {
    const [reqExistOne,setReqExistOne] = useState(false);
    const [reqExistTwo,setReqExistTwo] = useState(false);
 
-
+  const abortControllerOne = new AbortController();
+  const abortControllerTwo = new AbortController();
   const fetchUserData = (id,text) => {
-    if(id === 'one' && text!==''){
-      const abortControllerOne = new AbortController();
          if(reqExistOne){
            abortControllerOne.abort()
-           setReqExistOne(false)
+           setReqExistOne(false);
+         }
+         if(reqExistTwo){
+           abortControllerTwo.abort()
+           setReqExistTwo(false);
          }
       const url = `https://api.github.com/users/${text}` 
-      fetch(url)
+      fetch(url,{signal: (id==='one')? abortControllerOne.signal : abortControllerTwo.signal})
         .then(res => {
-           if(res.status === 200){
-             return res.json()
+           if(res.status === 200) {
+             return res.json() 
            }
-           console.log('404 data DoseNot Found !')
         }) 
-        .then(data => setFisrtUser(data))
+        .then(data => (id==='one') ? setFisrtUser(data): setSecUser(data))
         .catch(err => console.log(err))
-    }
-    if(id === 'two' && text!== ''){
-      const abortControllerTwo = new AbortController();
-       if(reqExistTwo){
-         abortControllerTwo.abort();
-         setReqExistTwo(false);
-       }
-      const url = `https://api.github.com/users/${text}` 
-      fetch(url)
-        .then(res => {
-           if(res.status === 200){
-             return res.json()
-           }
-           console.log('404 data DoseNot Found !')
-        }) 
-        .then(data => setSecUser(data))
-        .catch(err => console.log(err))
-    }
+
   }
-
-
-
   
   const userNamehandler = debounce((text,id) => {
-    if(id==='one'){
-          fetchUserData(id,text)
-    }
-    if(id==='two'){
-        fetchUserData(id,text)
-    }
+    (id==='one')? setReqExistOne(true) : setReqExistTwo(true)
+    fetchUserData(id,text)
   },500)
 
   
