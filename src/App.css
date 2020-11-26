@@ -1,0 +1,80 @@
+h1{
+  margin: 0;
+  padding: 0;
+}
+
+.App{
+  
+}
+.nav{
+  background-color: black;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+.user{
+  margin: 80px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.card{
+  padding: 30px;
+  margin: 20px;
+  border-radius: 50px;
+  box-shadow: 0 8px 24px -6px black;
+
+}
+.userOne{
+  background-color: wheat;
+}
+.userTwo{
+   background-color: orange;
+}
+
+.user-card {
+  width: 600px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card-image{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+/* User Input Box */
+.inputbox-one,.inputbox-two{
+  width: 50%;
+  height: 30px;
+  font-size: 18px;
+}
+
+/* card Button */
+.btn{
+  padding: 10px 30px;
+  border-radius: 30px;
+  font-size: 18px;
+}
+
+.public-Repo-btn{
+  background-color: maroon;
+  color: #fff;
+}
+
+.hide-repos-btn{
+  background-color: forestgreen;
+  color: #fff;
+}
+
+/* Repos style */
+.user-repos{
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.repos-link:link{
+   color: #000;
+}
